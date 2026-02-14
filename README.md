@@ -1,25 +1,82 @@
-# HackerrankCPP → C# 14 (preview)
+# HackerrankCPP
 
-Repo này đã được viết lại theo hướng C# (thiết lập `LangVersion=preview` để sẵn sàng cho C# 14).
+This repository includes:
+- C++ HackerRank exercise files in the repo root.
+- A C# console rewrite under `src/` using `HackerrankCSharp.csproj`.
 
-## Cách chạy
+## C++ Prerequisites
+
+- `cmake` (3.16+)
+- A C++ compiler:
+  - Windows: MSVC (Visual Studio Build Tools), MinGW `g++`, or LLVM `clang++`
+  - Linux: `g++` or `clang++`
+  - macOS: Apple Clang (`xcode-select --install`)
+
+## C++ Build all runnable exercises
 
 ```bash
-dotnet run
+cmake -S . -B build
+cmake --build build --config Release
 ```
 
-## Nội dung chính
+## C++ Run an exercise
 
-- Port các bài HackerRank cơ bản sang C# trong thư mục `src/Exercises`:
-  - Input/Output, basic data types, điều kiện, vòng lặp, hàm.
-  - Mảng, string, parse CSV, collection operations (`set`, `map`, `lower_bound`, sort, erase).
-  - OOP: class, kế thừa, đa cấp kế thừa, polymorphism, generic class, record `Box`.
-- Bổ sung ví dụ quản lý tài nguyên trong `src/Resources/DisposableExamples.cs`:
-  - `using (...)` với `IDisposable`.
-  - `using var` với `IDisposable`.
-  - `await using` với `IAsyncDisposable`.
+Example:
 
-## Gợi ý mở rộng
+```bash
+./build/bin/HelloWorld
+```
 
-- Có thể tách mỗi bài thành project console riêng để tương thích 1-1 với format chấm HackerRank.
-- Có thể thêm test xUnit cho từng bài nếu muốn CI kiểm tra tự động.
+On Windows PowerShell:
+
+```powershell
+.\build\bin\HelloWorld.exe
+```
+
+## C++ Windows helper script
+
+Use `run.ps1` to configure, build one target, and run it:
+
+```powershell
+.\run.ps1 -Exercise HelloWorld
+```
+
+With input from file:
+
+```powershell
+.\run.ps1 -Exercise InputOutput -InputFile .\sample-input.txt
+```
+
+## C# Prerequisites
+
+- .NET SDK 9.0+
+
+Check installed SDKs:
+
+```bash
+dotnet --list-sdks
+```
+
+## C# Build
+
+```bash
+dotnet restore HackerrankCSharp.csproj
+dotnet build HackerrankCSharp.csproj -c Release
+```
+
+## C# Run
+
+```bash
+dotnet run --project HackerrankCSharp.csproj -c Release
+```
+
+This runs the entry point in `src/Program.cs` and exercises code under `src/Exercises` and `src/Resources`.
+
+## Notes
+
+Executables are generated in:
+
+- `build/bin` (single-config generators like Ninja/Makefiles)
+- or generator-specific output folders when applicable
+
+- Files that do not contain `main()` are treated as snippet-only (typical HackerRank partial solutions) and are skipped by CMake.

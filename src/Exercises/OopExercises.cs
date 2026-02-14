@@ -17,7 +17,7 @@ public sealed class StudentStructLike
     public int Standard { get; init; }
 }
 
-public sealed class Rectangle
+public class Rectangle
 {
     public int Width { get; set; }
     public int Height { get; set; }
@@ -103,5 +103,5 @@ public sealed class AddElements<T>
 {
     private readonly T _element;
     public AddElements(T element) => _element = element;
-    public T Add(T value) => (dynamic)_element + (dynamic)value;
+    public T Add(T value) => (T)((dynamic)_element + (dynamic)value)!;
 }

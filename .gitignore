@@ -1,0 +1,27 @@
+# Build outputs
+bin/
+obj/
+build/
+
+# CMake artifacts
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+Makefile
+
+# Logs and runtime artifacts
+*.log
+
+# IDE/editor folders
+.vs/
+.vscode/
+.idea/
+
+# User-specific files
+*.user
+*.suo
+
+# OS artifacts
+.DS_Store
+Thumbs.db

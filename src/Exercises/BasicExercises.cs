@@ -65,7 +65,7 @@ public static class Pointer
 
 public static class Arrays
 {
-    public static int[] Reverse(int[] values) => values.Reverse().ToArray();
+    public static int[] Reverse(int[] values) => values.AsEnumerable().Reverse().ToArray();
 }
 
 public static class Strings
